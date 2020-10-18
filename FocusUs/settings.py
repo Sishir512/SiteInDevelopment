@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Users',
 ]
 
 MIDDLEWARE = [
@@ -105,6 +106,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+
+
+AUTH_USER_MODEL = 'Users.FocusUsUser' #This line was later added so that Django knows to use the new User class
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
