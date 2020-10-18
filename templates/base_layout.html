@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  
+  {% block titlesection %}
+  {% endblock %}
+
+<!-- CSS  -->
+  <!-- google icon cdn-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- M css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+
+  <!-- linking style.css -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+ 
+  {% block customstyling %}
+  {% endblock %}
+</head>
+<body>
+
+
+  <!-- Nav Bar-->
+  <div class="navbar-fixed">
+    <nav class="black">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo">FocusUs </a>
+          <a href="" data-target="mobile-nav" class="sidenav-trigger">
+            <i class="material-icons">menu</i>
+          </a>
+          <ul class="right hide-on-med-and-down hover_backcolor">
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="/video">Videos</a></li>
+            <li><a href="#">AskUs</a></li>
+            <li><a href="/about">AboutUs</a></li>
+            <li><a href="/contact">ContactUs</a></li>
+            <a class=" white black-text waves-effect waves-dark btn  modal-trigger" href="/signin"><b>SIGN IN </b></a>
+
+           
+          
+
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <ul id="mobile-nav" class="sidenav">
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="/video">Videos</a></li>
+    <li><a href="#">AskUs</a></li>
+    <li><a href="/about">AboutUs</a></li>
+    <li><a href="/contact">ContactUs</a></li>
+    <a class="black white-text waves-effect waves-light btn" style="margin-left: 27px; margin-top: 7px;">SIGN IN</a>
+
+     
+        
+</ul>
+    
+
+
+        
+      
+{% block contents %}
+{% endblock %}
+  
+
+          
+    
+
+      
+
+         
+  
+  
+      <!-- footer -->  
+
+      <section> 
+
+      <footer class=" hide-on-small-only black page-footer">
+        <div class="" style=" width: 90%; margin: auto;">
+          <div class="row">
+            <div class="col  s12 m6 l3 ">
+              <h5 class="white-text">FocusUs</h5>
+              <p class="grey-text text-lighten-4">FocusUs provides tech tutorials education news, blogs, contents and videos for FREE!</p>
+            </div>
+            <div class="  col l2 m6 s12 offset-l1 ">
+              <h5 class="white-text">Quick Links</h5>
+              <ul>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+              </ul>
+            </div>
+            <div class="col l2 m6 s12  ">
+                <h5 class="white-text">Contacts</h5>
+                <ul>
+                <li>Kathmandu Nepal</li>
+                <li>focusus@gmail.com</li>
+                <li>987377373</li>
+            </ul>     
+            </div>
+
+            <div class=" col l3 m6 s12 offset-l1 ">
+                <h5 class="white-text">Visit Us</h5>
+                <br>
+                <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;"  class="fab fa-youtube-square fa-2x"></i></a>
+            <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-facebook-square fa-2x"></i></a>
+            <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-instagram fa-2x"></i></a>
+            <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-twitter-square fa-2x"></i> </a>
+
+            </div>
+          </div>
+          <hr>
+        
+        
+        <div class="footer-copyright">
+        
+        
+          ©  FocusUs All Rights Reserved
+          
+        
+        </div>
+    </div>
+      </footer>
+
+      <footer class=" hide-on-med-and-up black page-footer">
+        <div class="" style=" width: 90%; margin: auto;">
+          <div class="center-align row">
+            <div class="col  s12 m6 l3 ">
+              <h5 class="white-text">FocusUs</h5>
+              <p class="grey-text text-lighten-4">FocusUs provides tech tutorials education news, blogs, contents and videos for FREE!</p>
+            </div>
+            <div class="  col l2 m6 s12 offset-l1 ">
+              <h5 class="white-text">Quick Links</h5>
+              <ul>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+              </ul>
+            </div>
+            <div class="col l2 m6 s12  ">
+                <h5 class="white-text">Contacts</h5>
+                <ul>
+                <li>Kathmandu Nepal</li>
+                <li>focusus@gmail.com</li>
+                <li>987377373</li>
+            </ul>     
+            </div>
+
+            <div class=" col l3 m6 s12 offset-l1 ">
+                <h5 class="white-text">Visit Us</h5>
+                
+            <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;"  class="fab fa-youtube-square fa-2x"></i></a>
+            <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-facebook-square fa-2x"></i></a>
+            <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-instagram fa-2x"></i></a>
+            <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-twitter-square fa-2x"></i> </a>
+
+            </div>
+          </div>
+          <hr>
+        
+        
+        <div class=" footer-copyright">
+        
+   
+          ©  FocusUs All Rights Reserved
+          
+       
+        </div>
+    </div>
+      </footer>
+
+    </section>
+
+  <!--  Scripts-->
+
+  <!--jquery cdn-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!-- M Js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- font awesome cdn-->
+  <script src="https://kit.fontawesome.com/9478bf204b.js" crossorigin="anonymous"></script>
+  
+
+  
+  <!--JS initaliztion -->
+  <script src="{% static 'js/init.js'%}"></script>
+
+  {% block customjs %}
+  {% endblock %}
+
+
+  </body>
+</html>

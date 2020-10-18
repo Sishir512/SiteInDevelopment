@@ -1,0 +1,193 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block titlesection %}
+<title>Videos</title>
+{% endblock %}
+
+<!--CSS Block-->
+{% block customstyling %}
+
+<!--venobox css-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/venobox/1.8.6/venobox.min.css">
+{% endblock %}
+
+<!--Main Block-->
+{% block contents %}
+
+
+
+
+
+
+
+
+<!-- video slider-->
+
+<section class="slider sliderv z-depth-3">
+    <ul class="slides">
+      <li>
+        <img src="{% static 'img/blog2.jpg' %}"> 
+        <div class="caption center-align">
+          <h3>Videos</h3>
+          <h5 class="light grey-text text-lighten-3"> Find Exclusive Videos of Tech, reviews, tutorials <br> and Education. 
+              For more visit our YouTube
+          </h5> <br>
+          <a class=" white black-text waves-effect waves-black btn" href="https://www.youtube.com/focusus2" target="_blank"> <b>Visit Now  </b></a>  
+          
+  
+        </div>
+      </li>
+      
+    </ul>
+  </section>
+  
+  
+  <br> <br> <br>
+     
+          <!-- Category using buttons -->
+  
+          <div class="width_content">
+       
+            <div class="row">
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid  waves-effect waves-light grey darken-4">All Videos</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Playlists</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light grey darken-4">Programming</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Reviews</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light grey darken-4">Education</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Editings</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light grey darken-4">Tutorials</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down" >
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Others</a>
+              </div>
+  
+            </div>
+          </div>
+            <!--End of Category using buttons -->
+  
+            <br>
+            <br> 
+  
+            <!-- Search Box -->
+            
+  
+            <form method="POST">
+              <div class="search">
+                <input type="text" name="q" class="searchbox browser-default" placeholder=" Search Videos" style="font-size: 15px; padding-left: 30px; font-family: Roboto 2.0;">
+                <button type="submit" class="searchbtn"><i class="fas fa-search"></i></button>
+              </div>
+            </form>
+  
+            <!-- End of  Search Box -->
+            <br>
+            <br> 
+      
+            
+
+
+                      
+        <!-- all video section -->
+       
+          <section>
+            <h2 class="center-align"> All Videos</h2> 
+          
+            <br>
+          
+              <div class="row">
+                <div class="col s4 m4 l4 offset-s4 offset-l4 offset-m4"> <hr></div> <br> <br> <br>
+              </div>
+            
+              
+        <div class="  dropdowns" style="margin-left: 10.8%">
+          <button onclick="trigger()" class="dropbtns"> &nbsp; Sort Videos <i class="material-icons right">arrow_drop_down</i></button>
+
+          <div id="myDropdowns" class="dropdown-contents">
+            <a href="#">Latest Videos</a>
+            <a href="#">Popular Videos</a>
+            <a href="#">Random Videos</a>
+          </div>
+        </div> 
+
+
+        <br>
+        <br> 
+
+        <div class="row  width_content_narrow" >
+            
+            
+            {% for data in datas %}
+                <div class="col l4 m6 s12">
+                    <div class="card "  >
+                        <a class="venobox" data-autoplay="true" data-vbtype="video" data-gall="myGallery" href="{{data.url}}">
+                            <div class="card-image  video_transition">
+                                <img src="{{data.img.url}}" >
+                                <i class=" material-icons center button_placement">play_circle_filled</i>
+                            </div>    
+                            </a>
+                            <div class="card-content black-text">                  
+                                <span class="card-title"> <b class="trunk1">{{data.title}}</b> </span>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        {% endfor %}
+                            
+          </div>   
+
+
+
+      
+   <br> <br>
+   
+   <ul class="pagination center" >
+    <li class="disabled"><a href="#!"><i class="material-icons black-text">chevron_left</i></a></li>
+    <li class="active black"><a href="#!"> 1</a></li>
+    <li class="waves-effect"><a class="black-text" href="#!"> <b>2</b></a></li>
+    <li class="waves-effect"><a class="black-text" href="#!"> <b>3</b></a></li>
+    <li class="waves-effect"><a class="black-text" href="#!"><b>4</b></a></li>
+    
+    <li class="waves-effect"><a href="#!"><i class="material-icons black-text">chevron_right</i></a></li>
+  </ul>
+
+</section>
+
+<br> <br>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+<!--JS Block-->
+
+{% block customjs %}
+
+<!--Venobox js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/venobox/1.8.6/venobox.min.js"></script>
+<script src="{% static 'js/extra.js' %}"></script>
+
+{% endblock %}
