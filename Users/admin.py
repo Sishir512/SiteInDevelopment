@@ -16,7 +16,7 @@ class FocusUsUserAdmin(UserAdmin):
     add_form = FocusUsUserCreationForm
     form = FocusUsUserChangeForm
     model = FocusUsUser
-    list_display = ('email', 'is_admin', 'is_active',)
+    list_display = ('email','username','fullname', 'is_admin', 'is_active',)
     list_filter = ('email', 'is_admin', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),

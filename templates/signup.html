@@ -1,10 +1,13 @@
 {% load static %}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>FocusUs</title>
+  <title>SignUp</title>
 
 <!-- CSS  -->
   <!-- google icon cdn-->
@@ -29,16 +32,18 @@
   </head> 
 
   <body style="background-color: #263238;">
+    <br>
+    <br>
+    <div class="center-align">
+    <img src="{%static 'img/logo.png' %}" alt="" style="height: 100px; width: 100px;">
 
-  
+  </div>
+  <br>
+
+
     <div class="row">
     
-      <div class="col s12 m4 push-m4 l4 push-l4" 
-      style="margin: 0;
-      position: absolute;
-      top: 50%;
-      -ms-transform: translateY(-50%);
-      transform: translateY(-50%);">
+      <div class="col s12 m4 push-m4 l4 push-l4">
 
       
         <div class="card hoverable">
@@ -72,13 +77,19 @@
                 </p>
               </div>
               <br>
-              <p class="red-text" style="margin-left:5px;">Your email or password is incorrect! </p>
+              {% if messages %}
+                {% for message in messages %}
+                  {%if "login" in message.tags %}
+                    <p class="red-text" style="margin-left:5px;">{{message}} </p>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
               <br>
 
               <a style="margin-left:5px;" href="#">Forgot Password ?</a> 
                   <br>
                   <div class="center-align">
-                      {% csrf_token %}
+                    {% csrf_token %}
                     <button class="blue-grey darken-4 btn  waves-effect waves-light" type="submit" name="action">Sign In
                       <i class="material-icons right">send</i>
                     </button>
@@ -101,31 +112,44 @@
 
               <div class="input-field">
                 <i class="material-icons prefix">account_circle</i>
-                <input id="icon_prefix" type="text" class="validate" required name="">
-                <label for="icon_prefix">Full Name</label>
+                <input id="icon_prefix1" type="text" class="validate" required name="signup_name">
+                <label for="icon_prefix1">Full Name</label>
               </div>
 
               <div class="input-field">
                 <i class="material-icons prefix">assignment_ind</i>
-                <input id="icon_prefix" type="text" class="validate" required>
-                <label for="icon_prefix">Username </label>
+                <input id="icon_prefix2" type="text" class="validate" required name="signup_username">
+                <label for="icon_prefix2">Username </label>
               </div>
       
               <div class="input-field">
                 <i class="material-icons prefix">email</i>
-                <input id="email" type="email" class="validate" required>
+                <input id="email" type="email" class="validate" required name="signup_email">
                 <label for="email">Email</label>
               </div>
 
               <div class="input-field">
                 <i class="material-icons prefix">vpn_key</i>
-                <input id="icon_email" type="password" class="validate" required>
-                <label for="icon_email">Set Password</label>
+                <input id="icon_email1" type="password" class="validate" required name="signup_password">
+                <label for="icon_email1">Set Password</label>
               </div>
 
-              <p class="red-text" style="margin-left:5px;">This email is already taken! </p>
+
+
+
+              
+
+
+              {% if messages %}
+                {% for message in messages %}
+                  {%if "signup" in message.tags %}
+                    <p class="red-text" style="margin-left:5px;">{{message}} </p>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+
             
-              <p class="red-text" style="margin-left:5px;">Your email or password is incorrect! </p>
+              
               <br>
               <div>
                 <p>
@@ -137,7 +161,7 @@
               </div>
                   <br>
                   <div class="center-align">
-                      {% csrf_token %}
+                    {% csrf_token %}
                     <button class="blue-grey darken-4 btn  waves-effect waves-light" type="submit" name="action">Sign Up
                       <i class="material-icons right">send</i>
                     </button>

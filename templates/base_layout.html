@@ -19,10 +19,29 @@
   <!-- linking style.css -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
  
+  <style>
+     ul#dropdown1.dropdown-content{
+          top:-64px;
+        }
+
+        .hover_color li:hover{
+            background-color: #3e2723;
+        }
+  </style>
   {% block customstyling %}
   {% endblock %}
 </head>
 <body>
+
+
+<!--Dropdown Contents-->
+  <ul id="dropdown1" class="dropdown-content black darken-4 ">
+    <li><a class="white-text drop" href="/signup/logout"> Logout<i class="material-icons right">input</i> </a></li>
+    
+  
+  </ul>
+
+
 
 
   <!-- Nav Bar-->
@@ -40,8 +59,12 @@
             <li><a href="#">AskUs</a></li>
             <li><a href="/about">AboutUs</a></li>
             <li><a href="/contact">ContactUs</a></li>
-            <a class=" white black-text waves-effect waves-dark btn  modal-trigger" href="/signin"><b>SIGN IN </b></a>
+            {% if user.is_authenticated %}
+              <li><a class="dropdown-trigger" href="#" data-target="dropdown1">{{user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
 
+            {% else %}
+              <a class=" white black-text waves-effect waves-dark btn  modal-trigger" href="/signup"><b>SIGN IN </b></a>
+            {% endif %}
            
           
 
@@ -57,8 +80,11 @@
     <li><a href="#">AskUs</a></li>
     <li><a href="/about">AboutUs</a></li>
     <li><a href="/contact">ContactUs</a></li>
-    <a class="black white-text waves-effect waves-light btn" style="margin-left: 27px; margin-top: 7px;">SIGN IN</a>
-
+    {% if user.is_authenticated %}
+        <a class="black white-text waves-effect waves-light btn" style="margin-left: 27px; margin-top: 7px;" href="/signup/logout">LOGOUT</a>
+    {% else %}
+        <a class="black white-text waves-effect waves-light btn" style="margin-left: 27px; margin-top: 7px;" href="/signup">SIGN IN</a>
+    {% endif %}
      
         
 </ul>
@@ -190,10 +216,19 @@
   <!-- font awesome cdn-->
   <script src="https://kit.fontawesome.com/9478bf204b.js" crossorigin="anonymous"></script>
   
+  <script>
+    $(document).ready(function(){
+      $(".sidenav").sidenav();
+      $(".dropdown-trigger").dropdown();
+      
+    });
+    
+</script>
 
   
   <!--JS initaliztion -->
   <script src="{% static 'js/init.js'%}"></script>
+  
 
   {% block customjs %}
   {% endblock %}
