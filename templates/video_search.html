@@ -1,0 +1,230 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block titlesection %}
+<title>{{request.GET.query}}</title>
+{% endblock %}
+
+<!--CSS Block-->
+{% block customstyling %}
+
+<!--venobox css-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/venobox/1.8.6/venobox.min.css">
+{% endblock %}
+
+<!--Main Block-->
+{% block contents %}
+
+
+
+
+
+
+
+
+<!-- video slider-->
+
+<section class="slider sliderv z-depth-3">
+    <ul class="slides">
+      <li>
+        <img src="{% static 'img/blog2.jpg' %}"> 
+        <div class="caption center-align">
+          <h3>Videos</h3>
+          <h5 class="light grey-text text-lighten-3"> Find Exclusive Videos of Tech, reviews, tutorials <br> and Education. 
+              For more visit our YouTube
+          </h5> <br>
+          <a class=" white black-text waves-effect waves-black btn" href="https://www.youtube.com/focusus2" target="_blank"> <b>Visit Now  </b></a>  
+          
+  
+        </div>
+      </li>
+      
+    </ul>
+  </section>
+  
+  
+  <br> <br> <br>
+     
+          <!-- Category using buttons -->
+  
+          <div class="width_content">
+       
+            <div class="row">
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid  waves-effect waves-light grey darken-4">All Videos</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Playlists</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light grey darken-4">Programming</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Reviews</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light grey darken-4">Education</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Editings</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light grey darken-4">Tutorials</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down" >
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Others</a>
+              </div>
+  
+            </div>
+          </div>
+            <!--End of Category using buttons -->
+  
+            <br>
+            <br> 
+  
+            <!-- Search Box -->
+            
+  
+            <form method="GET" action="{% url 'search_result' %}">
+              <div class="search">
+                <input type="text" name="query" class="searchbox browser-default" placeholder=" Search Videos" style="font-size: 15px; padding-left: 30px; font-family: Roboto 2.0;">
+                <button type="submit" class="searchbtn"><i class="fas fa-search"></i></button>
+              </div>
+            </form>
+  
+            <!-- End of  Search Box -->
+            <br>
+            <br> 
+      
+            
+
+
+                      
+        <!-- all video section -->
+       
+          <section>
+            <h2 class="center-align"> All Videos</h2> 
+          
+            <br>
+          
+              <div class="row">
+                <div class="col s4 m4 l4 offset-s4 offset-l4 offset-m4"> <hr></div> <br> <br> <br>
+              </div>
+            
+              
+        <div class="  dropdowns" style="margin-left: 10.8%">
+          <button onclick="trigger()" class="dropbtns"> &nbsp; Sort Videos <i class="material-icons right">arrow_drop_down</i></button>
+
+          <div id="myDropdowns" class="dropdown-contents">
+            <a href="#">Latest Videos</a>
+            <a href="#">Popular Videos</a>
+            <a href="#">Random Videos</a>
+          </div>
+        </div> 
+
+
+        <br>
+        <br> 
+
+        <div class="row  width_content_narrow" >
+            
+            
+            {% for data in object_list %}
+                <div class="col l4 m6 s12">
+                    <div class="card "  >
+                        <a class="venobox" data-autoplay="true" data-vbtype="video" data-gall="myGallery" href="{{data.url}}">
+                            <div class="card-image  video_transition">
+                                <img src="{{data.img.url}}" >
+                                <i class=" material-icons center button_placement">play_circle_filled</i>
+                            </div>    
+                            </a>
+                            <div class="card-content black-text">                  
+                                <span class="card-title"> <b class="trunk1">{{data.title}}</b> </span>
+                                </div>
+                            
+                            </div>
+                            </div>
+                        {% endfor %}
+                            
+          </div>   
+
+
+
+      
+   <br> <br>
+   {% block pagination %}
+      {% if is_paginated %}
+   
+      <ul class="pagination center" >
+        {% if page_obj.number == 1 %}
+            <li class="disabled" title="First Page"><a href="#!"><i class="material-icons">first_page</i></a></li>
+        
+        {% else %}
+            <li class="" title="First Page"><a href="?page=1"><i class="material-icons">first_page</i></a></li>
+        {% endif %}
+        {% if page_obj.has_previous %}
+            <li class="waves-effect" title="Previous Page"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+        {% else %}
+            <li class="disabled" title="Previous Page"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        {% endif %}
+
+        {% if page_obj.number|add:'-1' > 1 %}
+            <li class="page-item"><b>. .</b></li>
+        {% endif %}
+
+        {% for i in paginator.page_range %} {% if page_obj.number == i %}
+            <li class="active grey darken-4"> <a href="#!"> {{ i }}  </a></li>
+        {% elif i > page_obj.number|add:'-2' and i < page_obj.number|add:'2' %}
+            <li class="waves-effect "><a class="" href="?page={{i}}"> <b>{{ i }}</b></a></li>
+        
+        {% endif %} {% endfor %}
+
+        {% if page_obj.paginator.num_pages > page_obj.number|add:'1' %}
+            <li><b>. .</b></li>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <li class="waves-effect" title="Next Page"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+        {% else %}
+            <li class="disabled" title="Next Page"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        {% endif %}
+        
+        {% if page_obj.number == page_obj.paginator.num_pages %}
+            <li class="disabled" title="Last Page"><a href="#!"><i class="material-icons">last_page</i></a></li>
+
+        {% else %}
+            <li class="waves-effect" title="Last Page"><a href="?page={{ page_obj.paginator.num_pages }}"><i class="material-icons">last_page</i></a></li>
+
+        {% endif %}
+
+      </ul>
+        {% endif %}
+  {% endblock %}
+
+</section>
+
+<br> <br>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+<!--JS Block-->
+
+{% block customjs %}
+
+<!--Venobox js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/venobox/1.8.6/venobox.min.js"></script>
+<script src="{% static 'js/extra.js' %}"></script>
+
+{% endblock %}

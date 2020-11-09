@@ -1,10 +1,17 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect , HttpResponse
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode , urlsafe_base64_decode
+from django.utils.encoding import force_bytes , force_text
 from django.contrib.auth.models import auth
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.sites.shortcuts import get_current_site
+from .tokens import account_activation_token
+from django.core.mail import EmailMessage
+from django.conf import settings
 # Create your views here.
+
 
 def signup(request):
     if request.method == 'POST':
@@ -24,9 +31,20 @@ def signup(request):
                 messages.error(request,'The email has been used already' , extra_tags='signup')
                 return redirect('/signup#signup') 
             else:
-                user=get_user_model().objects.create_user(username=signup_username,password=signup_password,fullname=signup_name,email=signup_email)    
+                user=get_user_model().objects.create_user(username = signup_username , password = signup_password , fullname = signup_name , email = signup_email , is_active = False)    
                 user.save()
-                return redirect('/signup')
+                current_domain = get_current_site(request).domain
+                email_message = render_to_string('accountactivationmail.html',
+                {'user':user , 
+                'domain':current_domain,
+                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+                'token':account_activation_token.make_token(user)
+                })
+                email_title = 'Activate your FocusUs account'
+                to_email = user.email
+                email = EmailMessage(email_title , email_message , to=[to_email])
+                email.send()
+                return HttpResponse('Please check your email to confirm')
         else:     
             user=auth.authenticate(username=login_username,password=login_password)
             if user is not None:
@@ -41,7 +59,25 @@ def signup(request):
         return render(request , 'signup.html')
 
 
-@login_required(login_url='/signup')
+
 def logout(request):
     auth.logout(request)
-    return redirect('/')    # Redirect to the same page 
+    if 'next' in request.POST:
+        return redirect(request.POST.get('next'))
+    else:
+        return redirect('/') 
+
+
+def activate(request , uidb64 , token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = get_user_model().objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user , token):
+        user.is_active = True
+        user.save()
+        auth.login(request , user , backend='django.contrib.auth.backends.ModelBackend')
+        return HttpResponse("Your account has been confirmed")
+    else:
+        return HttpResponse("Your link has expired")

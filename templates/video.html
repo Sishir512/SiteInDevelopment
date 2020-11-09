@@ -85,9 +85,9 @@
             <!-- Search Box -->
             
   
-            <form method="POST">
+            <form method="GET" action="{% url 'search_result' %}">
               <div class="search">
-                <input type="text" name="q" class="searchbox browser-default" placeholder=" Search Videos" style="font-size: 15px; padding-left: 30px; font-family: Roboto 2.0;">
+                <input type="text" name="query" class="searchbox browser-default" placeholder=" Search Videos" style="font-size: 15px; padding-left: 30px; font-family: Roboto 2.0;">
                 <button type="submit" class="searchbtn"><i class="fas fa-search"></i></button>
               </div>
             </form>

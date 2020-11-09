@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import homedata,homeurl
 # Create your views here.
 
+
 def index(request):
     data1=homedata.objects.all()
     data2=homeurl.objects.all()

@@ -7,11 +7,11 @@ class FocusUsUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
         model = FocusUsUser
-        fields = ('email',)
+        fields = ('email','username')
 
 
 class FocusUsUserChangeForm(UserChangeForm):
 
     class Meta:
         model = FocusUsUser
-        fields = ('email',)
+        fields = ('email','username','password','is_admin','is_active')

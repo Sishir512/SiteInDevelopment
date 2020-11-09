@@ -81,12 +81,14 @@
                 {% for message in messages %}
                   {%if "login" in message.tags %}
                     <p class="red-text" style="margin-left:5px;">{{message}} </p>
+                    <br>
                   {% endif %}
                 {% endfor %}
               {% endif %}
-              <br>
+              
 
               <a style="margin-left:5px;" href="#">Forgot Password ?</a> 
+                  <br>
                   <br>
                   <div class="center-align">
                     {% csrf_token %}
@@ -174,7 +176,7 @@
         <div class="center">
           <h6 class="white-text">or login with</h6>
           <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-google fa-2x hoverable"></i></a>
-          <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-facebook-f fa-2x hoverable"></i></a>
+          <a href="" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-facebook-f fa-2x hoverable"></i></a>
           <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-twitter fa-2x hoverable"></i></a>
         </div>
       </div>

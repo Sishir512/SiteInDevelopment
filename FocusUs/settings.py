@@ -26,7 +26,7 @@ SECRET_KEY = '814av1_58h6z9a$^y-pi8l*wzhoq677gi4@dh%7l1n0vhgif7='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.23' , '127.0.0.1']
 
 
 # Application definition
@@ -34,6 +34,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'index.apps.IndexConfig',
     'video.apps.VideoConfig',
+    'blog.apps.BlogConfig',
+    'signup.apps.SignupConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Users',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    
 ]
 
 MIDDLEWARE = [
@@ -51,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'FocusUs.urls'
@@ -66,6 +75,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+                
             ],
         },
     },
@@ -77,7 +88,7 @@ WSGI_APPLICATION = 'FocusUs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'focusus',
@@ -86,7 +97,14 @@ DATABASES = {
         'HOST': 'localhost',
     }
 }
+'''
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -106,10 +124,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SITE_ID = 1
 
 
+AUTH_USER_MODEL = 'Users.FocusUsUser' # This line was later added so that Django knows to use the new User class
 
-AUTH_USER_MODEL = 'Users.FocusUsUser' #This line was later added so that Django knows to use the new User class
+#For more information about custom authentication backend check : https://www.webforefront.com/django/customauthbackend.html
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',  #Default authentication backend
+                           'signup.models.UserNameBackend',  #Authentication backend which uses username to login  
+                           'allauth.account.auth_backends.AuthenticationBackend',]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -136,3 +160,41 @@ STATICFILES_DIRS=[
 STATIC_ROOT=os.path.join(BASE_DIR,'assets')
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+
+#Information for logging in and out
+LOGIN_URL = '/signup'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = '/signup/logout'
+LOGOUT_REDIRECT_URL = '/'
+
+#Facebook Keys
+
+SOCIALACCOUNT_PROVIDERS = \
+    {'facebook':
+       {'METHOD': 'oauth2',
+        'SCOPE': ['email','public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time'],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'kr_KR',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.4'}}
+
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'focusus1@gmail.com'
+EMAIL_HOST_PASSWORD = 'msihelios512201'
+EMAIL_PORT = 587

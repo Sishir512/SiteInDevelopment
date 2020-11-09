@@ -20,7 +20,7 @@ class FocusUsUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username',]
 
     objects = FocusUsUserManager()   #Specifying that  all objects for the class come from the FocusUsUserManager
 
@@ -42,3 +42,6 @@ class FocusUsUser(AbstractBaseUser, PermissionsMixin):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+    def get_fullname(self):
+        return self.fullname
