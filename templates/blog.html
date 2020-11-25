@@ -3,7 +3,7 @@
 
 <!--Title Block-->
 {% block titlesection %}
-<title>Blog</title>
+    <title>{{blogfield.title}}</title>
 {% endblock %}
 
 
@@ -15,6 +15,256 @@
 
 
 
+
+
+
+<div class="width_content">
+    <div  class="container" >
+  
+      <section>
+        <!-- Switch -->
+      <div style="float: left; font-weight: 500; margin-top:7px;">
+        <span>LAPTOP REVIEW</span> 
+      </div> 
+  
+    <div class="switch" style="float: right;">
+      <label>
+      
+        <input type="checkbox">
+        <span class="lever"></span>
+        Dark Mode
+      </label>
+    </div>
+  <br>
+     <div>
+      <h2>{{blogfield.title}} </h2>
+      <p style="font-size: 18pt;"> {{blogfield.description}}
+      </p>
+  
+      <div class="divider"></div>
+    
+  </div>
+    
+          <br>
+  <div class="row" >
+     <div class="col s12 m6 l6  ">
+      <span style="float: left;"><img src="{% static 'img/rab.jpg' %}" alt="" class="circle responsive-img" style="height: 50px; width: 50px; "></span>
+       <span> &nbsp;  &nbsp; <b style="font-size: 16px;"> BY  {{blogfield.author}}</b> </span> <br>
+       <span>  &nbsp;  &nbsp; {{blogfield.datepublished}} • {{blogfield.time_to_read}} MIN READ </span>
+     </div>
+   
+  
+  <div class=" hide-on-small-only col s12 m6 l6  right-align ">
+    <i style="font-size: 34px; margin: 8px 10px;" class="fas fa-share-alt"></i>
+    <a href="https://www.youtube.com/" target="_blank"> <i style="font-size: 37px;  margin: 8px 2px;" class="fab fa-facebook-square"></i></a>
+    <a href="https://www.youtube.com/" target="_blank"> <i style=" font-size: 37px;  margin: 8px 2px;" class="fab fa-tumblr-square"></i></a>
+    <a href="https://www.youtube.com/" target="_blank"> <i style=" font-size: 37px;  margin: 8px 2px;" class="fab fa-twitter-square"></i> </a>
+    <a href="https://www.youtube.com/" target="_blank"> <i style=" font-size: 37px;  margin: 8px 2px;" class="fab fa-reddit-square"></i> </a>
+    <a href="https://www.youtube.com/" target="_blank"> <i style=" font-size: 37px;  margin: 8px 2px;" class="fab fa-linkedin "></i> </a>
+  
+  </div>
+  
+  <div class=" hide-on-med-and-up col s12 m6 l6 " style="margin-top: 20px; margin-left: 10px;">
+    <i style="font-size: 34px;  margin: 8px 10px;" class="fas fa-share-alt"></i>
+    <a href="https://www.youtube.com/" target="_blank"> <i style="font-size: 37px;  margin: 8px 2px;" class="fab fa-facebook-square"></i></a>
+    <a href="https://www.youtube.com/" target="_blank"> <i style=" font-size: 37px;  margin: 8px 2px;" class="fab fa-tumblr-square"></i></a>
+    <a href="https://www.youtube.com/" target="_blank"> <i style=" font-size: 37px;  margin: 8px 2px;" class="fab fa-twitter-square"></i> </a>
+    <a href="https://www.youtube.com/" target="_blank"> <i style=" font-size: 37px;  margin: 8px 2px;" class="fab fa-reddit-square"></i> </a>
+    <a href="https://www.youtube.com/" target="_blank"> <i style=" font-size: 37px;  margin: 8px 2px;" class="fab fa-linkedin "></i> </a>
+  
+  </div>
+  
+  </div>
+  
+  
+  </section>
+  
+  <br>  
+  
+  <!-- Blog Section -->
+  
+  <section>
+   <p>
+       {{blogfield.content | safe}}
+   </p>
+      
+  
+
+  
+    
+  </section>
+  
+  
+  
+  
+  <!-- Comment section-->
+  
+  <section>
+  <div class="divider"></div>
+  <br>
+  <h4>3  Comments </h4>
+  <br>
+  
+  <!-- comment input filed-->
+  <div>
+  <div class="input-field">
+    <i class="material-icons prefix">comment</i>
+    <textarea id="commentarea" class="materialize-textarea"></textarea>
+    <label for="commentarea">Post Comment Here</label> 
+  </div>
+  
+  
+  <div class="right" style="margin-top: -15px;">
+    <a class="blue-grey darken-4 waves-effect waves-light btn" onclick="document.getElementById('commentarea').value = ''">Cancel </a> &nbsp;
+  
+    <a class=" grey darken-4 waves-effect waves-light btn" >Post</a>
+  </div>
+  </div>
+  
+  <br> <br> <br>
+  
+  <!--comment sample-->
+  
+  <div>
+    <span style="float: left;"><img src="img/haaa.jpg" alt="" class="circle responsive-img" style="height: 50px; width: 50px; "></span>
+     <span style="font-size: 13pt; font-weight:500; "> &nbsp;  &nbsp; @Sishir123 </span> <br>
+     <span>  &nbsp;  &nbsp; 1 day ago </span>
+  
+     <p class="blogcomment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, quas ipsum, nesciunt perspiciatis ad recusandae, vero 
+       consectetur 
+       maiores in aspernatur similique. Atque fugiat asperiores placeat! Voluptates beatae dolores officia voluptas!</p>
+       <span style=" cursor:pointer; font-size: 12pt">Reply</span>
+   </div>
+  
+  <br>
+   <div class="divider"></div>
+  <br>
+  
+  <div>
+    <span style="float: left;"><img src="img/haaa.jpg" alt="" class="circle responsive-img" style="height: 50px; width: 50px; "></span>
+     <span style="font-size: 13pt; font-weight:500; "> &nbsp;  &nbsp; @Sishir123 </span> <br>
+     <span>  &nbsp;  &nbsp; 1 day ago </span>
+  
+     <p class="blogcomment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, quas ipsum, nesciunt perspiciatis ad recusandae, vero 
+       consectetur 
+       maiores in aspernatur similique. Atque fugiat asperiores placeat! Voluptates beatae dolores officia voluptas!</p>
+       <span style=" cursor:pointer; font-size: 12pt">Reply</span>
+   </div>
+  
+  <br>
+  
+   <!--reply sample-->
+   <div  style="margin-left: 40px;">
+   <div>  
+   <div>
+    <span style="float: left;"><img src="img/haaa.jpg" alt="" class="circle responsive-img" style="height: 50px; width: 50px; "></span>
+     <span style="font-size: 13pt; font-weight:500; "> &nbsp;  &nbsp; @Sishir123 </span> <br>
+     <span>  &nbsp;  &nbsp; 1 day ago </span>
+  
+     <p class="blogcomment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, quas ipsum, nesciunt perspiciatis ad recusandae, vero 
+       consectetur 
+       maiores in aspernatur similique. Atque fugiat asperiores placeat! Voluptates beatae dolores officia voluptas!</p>
+       <span id="replybtn1" style=" cursor:pointer; font-size: 12pt">Reply</span>
+   </div>
+  
+  
+    <!-- reply input filed -->
+   <div id="replyarea1" style="display: none;">
+    <br>
+    <div class="input-field">
+      <i class="material-icons prefix">comment</i>
+      <textarea id="replyarea" class="materialize-textarea"></textarea>
+      <label for="replyarea">Post Your Reply Here</label> 
+    </div>
+    
+    
+    <div class="right" style="margin-top: -15px;">
+      <a class="blue-grey darken-4 waves-effect waves-light btn" onclick="document.getElementById('replyarea').value = ''">Cancel </a> &nbsp;
+    
+      <a class=" grey darken-4 waves-effect waves-light btn" >Post</a>
+    </div>
+    </div>
+  </div>
+  </div>
+  
+  </section>
+  
+  <br> <br>
+  
+  <!-- releted blogs -->
+  <section>
+  <div>
+    <h4> Related Blogs </h4>
+        <div class="row">
+          <h6 class="right-align"> <a href="#" style="color: black;"> See all &nbsp; &nbsp; </a></h6> 
+         
+          <div class="col s12 m4 l4">
+            <div class="card hoverable card_mobile_sapcing">
+              <div class="card-image">
+                <img src="img/th1.png">
+              </div>
+              <div class="card-content">
+                  
+                <span class="trunk1" style="font-size: 15pt;"> Java Tutorials for the Beginners for Beginners for Beginners for Beginners </span>
+              
+              </div>
+              <div class="card-action">
+                <a href="#!" class="btn waves-effect waves-light grey darken-4">Read More</a>
+              </div>
+            </div>
+          </div>
+  
+  
+  
+          <div class="col s12 m4 l4">
+            <div class="card hoverable card_mobile_sapcing">
+              <div class="card-image">
+                <img src="img/ssd.png">
+              </div>
+              <div class="card-content">
+                  
+                <span class="trunk1" style="font-size: 15pt;"> Java Tutorials for the Beginners for Beginners for Beginners for Beginners </span>
+                
+              </div>
+              <div class="card-action">
+                <a href="#!" class="btn waves-effect waves-light grey darken-4">Read More</a>
+              </div>
+            </div>
+          </div>
+  
+  
+          <div class="col s12 m4 l4">
+            <div class="card hoverable card_mobile_sapcing">
+              <div class="card-image">
+                <img src="img/th2.jpg">
+              </div>
+              <div class="card-content">
+                  
+                <span class="trunk1" style="font-size: 15pt;"> Java Tutorials for the Beginners for Beginners for Beginners for Beginners </span>
+  
+              </div>
+              <div class="card-action">
+                <a href="#!" class="btn waves-effect waves-light grey darken-4">Read More</a>
+              </div>
+            </div>
+          </div>
+  
+          
+  
+            
+  
+            
+        </div>    
+      
+      
+  
+  </div>
+  </section>
+  
+  </div>  
+  </div>
+  
+  <br> <br>
 
 
     

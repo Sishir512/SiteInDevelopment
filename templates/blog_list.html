@@ -1,0 +1,275 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+<!--Title Block-->
+{% block titlesection %}
+    <title>Blog</title>
+{% endblock %}
+
+{% block customstyling %}
+<style>
+  
+    .hoverable{
+        margin-bottom: 20px;
+    }
+        
+  
+  
+    
+    .dropbtns {
+    background-color: #263238  ;
+    color: white;
+    padding: 7px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  .dropbtns:hover, .dropbtns:focus {
+    background-color: black   ;
+  }
+  
+  .dropdowns {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-contents {
+    display: none;
+    position: absolute;
+    background-color: #212121;
+    min-width: 135px;
+    overflow: auto;
+    z-index:1;
+  }
+  
+  .dropdown-contents a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdowns a:hover {background-color: black;}
+  
+  .show {display: block;}
+  
+  
+    
+  </style>
+{% endblock %}
+
+<!--Main Block-->
+{% block contents %}
+
+
+
+<section class="slider sliderv z-depth-3">
+    <ul class="slides">
+      <li>
+        <img src="{% static 'img/blog2.jpg' %}"> 
+        <div class="caption center-align"> 
+          <br> 
+          <h3>Videos</h3>
+          <h5 class="light grey-text text-lighten-3"> Find Exclusive Videos of Tech news, reviews, tutorials, <br> Education and many more. 
+          </h5> <br>
+          
+  
+        </div>
+      </li>
+      
+    </ul>
+  </section>
+  
+  
+  <br> <br> <br>
+     
+          <!-- Category using buttons -->
+  
+          <div class="width_content">
+       
+            <div class="row">
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid  waves-effect waves-light grey darken-4">All blogs</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Tech News</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light grey darken-4">Programming</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Reviews</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light grey darken-4">Education</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Editings</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down">
+                <a href="#!" class="btn wid waves-effect waves-light grey darken-4">Tutorials</a>
+              </div>
+              <div class="col s6 m3 l2 button-margin-down" >
+                <a href="#!" class="btn wid waves-effect waves-light blue-grey darken-4">Others</a>
+              </div>
+  
+            </div>
+          </div>
+            <!--End of Category using buttons -->
+  
+            <br>
+            <br> 
+  
+            <!-- Search Box -->
+            
+  
+            <form method="POST">
+              <div class="search">
+                <input type="text" name="q" class="searchbox browser-default" placeholder=" Search Blogs" style="font-size: 15px; padding-left: 30px; font-family: Roboto 2.0;">
+                <button type="submit" class="searchbtn"><i class="fas fa-search"></i></button>
+              </div>
+            </form>
+  
+            <!-- End of  Search Box -->
+            <br>
+            <br> 
+        
+  
+         
+            <section>
+              <h2 class="center-align"> All Blogs</h2> 
+            
+              <br>
+            
+                <div class="row">
+                  <div class="col s4 m4 l4 offset-s4 offset-l4 offset-m4"> <hr></div> <br> <br> <br>
+                </div>
+            </section>  
+  
+          <!-- all blog section -->
+  
+  
+  
+  
+  
+  
+          
+  
+          <div class="  dropdowns" style="margin-left: 10.8%">
+            <button onclick="trigger()" class="dropbtns"> &nbsp; Sort Blogs <i class="material-icons right">arrow_drop_down</i></button>
+  
+            <div id="myDropdowns" class="dropdown-contents">
+              <a href="#">Latest Blogs</a>
+              <a href="#">Popular Blogs</a>
+              <a href="#">Random Blogs</a>
+            </div>
+          </div> 
+  
+  
+        
+  <br>
+  <br>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+          
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+          <div class="row width_content_narrow" >
+  
+  
+            {% for blog_list in object_list %}
+                <div class="col s12 m6 l4">
+                  <div class="card hoverable">
+                    <div class="card-image">
+                      <img src="{% static 'img/ssd.png' %}">
+                    </div>
+                    <div class="card-content">
+                        
+                      <span class="card-title " title="{{blog_list.title}}">  <b class="trunk1"> {{blog_list.title}} </b></span>
+                      <p class="trunk2"> {{blog_list.description}} </p>
+                    </div>
+                    <div class="card-action">
+                      <a href="{% url 'BlogDetail' blog_list.slug%}" class="btn waves-effect waves-light grey darken-4">Read More</a>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+               
+  
+  
+           
+  
+  
+          
+  
+  
+  
+  
+         
+  
+  
+  
+  
+           
+                
+        
+        
+          
+                       
+          
+            </div>   
+  
+
+
+
+    
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block customjs %}
+    <script>
+        /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function trigger() {
+        document.getElementById("myDropdowns").classList.toggle("show");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtns')) {
+          var dropdowns = document.getElementsByClassName("dropdown-contents");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      }
+    </script>
+{% endblock %}

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +27,7 @@ SECRET_KEY = '814av1_58h6z9a$^y-pi8l*wzhoq677gi4@dh%7l1n0vhgif7='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.23' , '127.0.0.1' , 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1' , 'localhost']
 
 
 # Application definition
@@ -44,10 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Users',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
+    'social_django',
+    'ckeditor',
+    'ckeditor_uploader',
+    
     
 ]
 
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     
 ]
 
@@ -130,9 +132,10 @@ SITE_ID = 1
 AUTH_USER_MODEL = 'Users.FocusUsUser' # This line was later added so that Django knows to use the new User class
 
 #For more information about custom authentication backend check : https://www.webforefront.com/django/customauthbackend.html
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',  #Default authentication backend
+AUTHENTICATION_BACKENDS = ['social_core.backends.facebook.FacebookOAuth2',
+                           'django.contrib.auth.backends.ModelBackend',  #Default authentication backend
                            'signup.models.UserNameBackend',  #Authentication backend which uses username to login  
-                           'allauth.account.auth_backends.AuthenticationBackend',]
+                           ]
 
 
 # Internationalization
@@ -162,34 +165,35 @@ MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 #Information for logging in and out
-LOGIN_URL = '/signup'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_URL = '/signup/logout'
-LOGOUT_REDIRECT_URL = '/'
+#LOGIN_URL = '/signup'
+#LOGIN_REDIRECT_URL = '/change-username'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/about'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = 'ChangeUsername'
+#LOGOUT_URL = '/signup/logout'
+#LOGOUT_REDIRECT_URL = '/'
 
 #Facebook Keys
 
-SOCIALACCOUNT_PROVIDERS = \
-    {'facebook':
-       {'METHOD': 'oauth2',
-        'SCOPE': ['email','public_profile', 'user_friends'],
-        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
-        'FIELDS': [
-            'id',
-            'email',
-            'name',
-            'first_name',
-            'last_name',
-            'verified',
-            'locale',
-            'timezone',
-            'link',
-            'gender',
-            'updated_time'],
-        'EXCHANGE_TOKEN': True,
-        'LOCALE_FUNC': lambda request: 'kr_KR',
-        'VERIFIED_EMAIL': False,
-        'VERSION': 'v2.4'}}
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = '644629409536634'
+SOCIAL_AUTH_FACEBOOK_SECRET  = '7b9e8e12160a7d6474947fb1f2aa61ce' 
+SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email', 
+}
 
 
 
@@ -198,3 +202,24 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'focusus1@gmail.com'
 EMAIL_HOST_PASSWORD = 'msihelios512201'
 EMAIL_PORT = 587
+
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+        'extraPlugins': ','.join([
+            'codesnippet',
+            'divarea',
+            'embed'
+    ]),
+    },
+    
+}
+
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only

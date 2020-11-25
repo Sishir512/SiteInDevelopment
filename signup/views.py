@@ -10,10 +10,13 @@ from django.contrib.sites.shortcuts import get_current_site
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 from django.conf import settings
+from .forms import EditUsernameForm
 # Create your views here.
 
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect('/')
     if request.method == 'POST':
         login_username = request.POST.get('login_username')
         login_password = request.POST.get('login_password')
@@ -49,6 +52,9 @@ def signup(request):
             user=auth.authenticate(username=login_username,password=login_password)
             if user is not None:
                 auth.login(request,user)
+                next = request.GET.get('next')
+                if next:
+                    return redirect(next)
                 return redirect('/')
             else:
                 messages.error(request , 'Username or password not matching', extra_tags='login')
@@ -62,10 +68,10 @@ def signup(request):
 
 def logout(request):
     auth.logout(request)
-    if 'next' in request.POST:
-        return redirect(request.POST.get('next'))
-    else:
-        return redirect('/') 
+    next = request.GET.get('next')
+    if next:
+        return redirect(next)
+    return redirect('/') 
 
 
 def activate(request , uidb64 , token):
@@ -81,3 +87,28 @@ def activate(request , uidb64 , token):
         return HttpResponse("Your account has been confirmed")
     else:
         return HttpResponse("Your link has expired")
+
+
+@login_required(login_url='/signup')
+def change_username(request):
+    if request.method == 'POST':
+        form = EditUsernameForm(request.POST , instance = request.user)
+        print('----------------')
+        print(form['username'].value())
+        print('----------------')
+        next = request.GET.get('next')
+        if form.is_valid():
+            if get_user_model().objects.filter(username=form['username'].value()).exists():
+                messages.error(request,'The username has been taken already')
+                if next:
+                    return redirect('/signup/change-username?next={}'.format(next))
+                return redirect('/signup/change-username')
+                
+            else:
+                form.save()
+                if next:
+                    return redirect(next)
+                return redirect('/')
+    
+    form = EditUsernameForm(instance=request.user)
+    return render(request , 'setup_username.html' , {'form':form})

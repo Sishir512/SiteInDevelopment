@@ -10,7 +10,7 @@ class Category(models.Model):
 class VideoContent(models.Model): 
 
     CurrentDateTime = models.DateTimeField(default=timezone.now)   
-    title = models.CharField(max_length=40)
+    title = models.CharField(max_length=100)
     img = models.ImageField(upload_to = 'pics')
     url = models.URLField(max_length=200)
     category = models.ManyToManyField(Category)

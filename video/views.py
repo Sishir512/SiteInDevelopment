@@ -5,11 +5,7 @@ from django.db.models import Q
 from django.views.generic.detail import SingleObjectMixin
 # Create your views here.
 
-'''def video(request):
-    datas = VideoContent.objects.all()
-    return render(request , 'video.html',{'datas':datas})
-'''
-    
+
 class Video(ListView):
     model = VideoContent
     template_name = 'video_search.html'
@@ -19,16 +15,24 @@ class VideoSearch(ListView):
     model = VideoContent
     template_name = 'video_search.html'
 
-
+    def get(self , request , *args , **kwargs):
+        if request.GET.get('query') is None:
+            return redirect('/video')
+        else:
+            return super().get(request , *args , **kwargs)
     def get_queryset(self):
-        data_list = VideoContent.objects.all()
+        
         query = self.request.GET.get('query')
-        print('Query is ' , query)
+        
+        if not query:
+            return VideoContent.objects.none()
+        
         if query is not None:
-            data_list = VideoContent.objects.filter(
+            return VideoContent.objects.filter(
                 Q(title__icontains = query)
             )
-        return data_list
+        
+        
 
 
 

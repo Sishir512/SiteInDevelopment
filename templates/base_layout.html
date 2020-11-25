@@ -39,7 +39,7 @@
 
 <!--Dropdown Contents-->
   <ul id="dropdown1" class="dropdown-content black darken-4 ">
-    <li><a class="white-text drop" href="/signup/logout"> Logout<i class="material-icons right">input</i> </a></li>
+    <li><a class="white-text drop" href="/signup/logout?next={{ request.path_info }}"> Logout<i class="material-icons right">input</i> </a></li>
     
   
   </ul>
@@ -66,7 +66,7 @@
              <li><a class="dropdown-trigger" href="#" data-target="dropdown1">{{user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
             
             {% else %}
-              <a class=" white black-text waves-effect waves-dark btn  modal-trigger" href="/signup/?next={{ request.path_info }}"><b>SIGN IN </b></a>
+              <a class=" white black-text waves-effect waves-dark btn  modal-trigger" href="/signup?next={{ request.path_info }}"><b>SIGN IN </b></a>
             {% endif %}
            
           

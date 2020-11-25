@@ -12,7 +12,7 @@ from .managers import FocusUsUserManager
 
 
 class FocusUsUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(_('email address'), unique=True)
+    email = models.EmailField(_('email address'), unique=True , null=True)
     fullname = models.CharField(max_length=30)
     username = models.CharField(max_length=30 , default="focusususer")
     is_admin = models.BooleanField(default=False)

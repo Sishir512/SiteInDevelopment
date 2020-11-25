@@ -139,13 +139,15 @@
                             </div>    
                             </a>
                             <div class="card-content black-text">                  
-                                <span class="card-title"> <b class="trunk1">{{data.title}}</b> </span>
+                                <span class="card-title" title="{{data.title}}"> <b class="trunk1">{{data.title}}</b> </span>
                                 </div>
                             
                             </div>
                             </div>
                         {% endfor %}
-                            
+                      {% if not object_list %}
+                            No results found
+                      {% endif %}      
           </div>   
 
 

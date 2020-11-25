@@ -87,7 +87,7 @@
               {% endif %}
               
 
-              <a style="margin-left:5px;" href="#">Forgot Password ?</a> 
+              <a style="margin-left:5px;" href="{% url 'password_reset' %}">Forgot Password ?</a> 
                   <br>
                   <br>
                   <div class="center-align">
@@ -156,7 +156,7 @@
               <div>
                 <p>
                 <label>
-                  &nbsp;<input type="checkbox" />
+                  &nbsp;<input type="checkbox" required />
                   <span>Accept <a href="#">Privacy Policy</a> </span>
                 </label>
                 </p>
@@ -176,7 +176,7 @@
         <div class="center">
           <h6 class="white-text">or login with</h6>
           <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-google fa-2x hoverable"></i></a>
-          <a href="" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-facebook-f fa-2x hoverable"></i></a>
+          <a href="{% url 'social:begin' 'facebook' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-facebook-f fa-2x hoverable"></i></a>
           <a href="https://www.youtube.com/" target="_blank"> <i style="color: white; margin: 5px 10px;" class="fab fa-twitter fa-2x hoverable"></i></a>
         </div>
       </div>

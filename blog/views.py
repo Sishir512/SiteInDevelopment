@@ -1,6 +1,13 @@
 from django.shortcuts import render
-
+from django.views.generic import ListView , DetailView
+from .models import BlogField
 # Create your views here.
 
-def blog(request):
-    return render(request , 'blog.html')
+
+class BlogList(ListView):
+    model = BlogField
+    template_name = 'blog_list.html'
+    
+class BlogDetail(DetailView):
+    model = BlogField
+    template_name = 'blog.html'
