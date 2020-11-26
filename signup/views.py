@@ -111,4 +111,5 @@ def change_username(request):
                 return redirect('/')
     
     form = EditUsernameForm(instance=request.user)
+    form.initial['username']=''
     return render(request , 'setup_username.html' , {'form':form})
