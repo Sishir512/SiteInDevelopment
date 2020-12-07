@@ -38,11 +38,12 @@ class BlogField(models.Model):
         return BlogComment.objects.filter(CommentPost=self).count()
 
 class BlogComment(models.Model):
-    CommentPost = models.ForeignKey(BlogField , related_name='comments' , on_delete=models.CASCADE)
+    CommentPost = models.ForeignKey(BlogField ,  on_delete=models.CASCADE)
     author = models.ForeignKey(get_user_model() , on_delete=models.CASCADE)
     content = models.TextField()
     date_posted = models.DateTimeField(auto_now_add=True)
-    parent = models.ForeignKey('self' , null=True , blank=True , on_delete=models.CASCADE)
+    parent = models.ForeignKey('self' , null=True , blank=True , on_delete=models.CASCADE , related_name='replies')
+    
 
     class Meta:
         ordering=['-date_posted']

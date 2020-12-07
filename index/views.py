@@ -16,3 +16,5 @@ def index(request):
         return render(request,"index.html",{'data1':data1,'data2':data2})
 
 
+def handler404(request, exception):
+    return render(request, '404.html', status=404)

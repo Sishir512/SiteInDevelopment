@@ -1,0 +1,83 @@
+{% extends 'base_layout.html' %}
+{% load static %}
+
+{% block titlesection %}
+<title>Page not found.</title>
+{% endblock %}
+
+
+{% block customstyling %}
+
+<style>
+    body {
+ display: flex;
+ min-height: 100vh;
+ flex-direction: column;
+}
+
+.contenthaita {
+ flex: 1 0 auto;
+}
+
+.four_zero_four_bg{
+ background-image: url(https://cdn.dribbble.com/users/6509795/screenshots/14688885/media/c4fce2be0c8e2fc7cc2ab77575effc1b.gif);
+ height: 400px;
+ background-repeat: no-repeat;
+ background-position: center;
+
+
+ 
+}
+</style>
+
+{% endblock %}
+
+{% block contents %}
+
+
+
+
+
+
+
+
+<div class="contenthaita">
+    <div class="container">
+        <div class="four_zero_four_bg">
+            <h1 class="center ">404</h1>
+        
+        
+        </div>
+
+        <div style="margin-top: -40px;">
+            <h4 class="center">Opps! Looks like you are lost</h4>
+            <h5 class="center"> Don't worry we will navigate you to home. </h5>
+            
+        </div>
+        <br>
+        <div class="center-align">
+            <button href="/" class="center-align btn  waves-effect waves-light grey darken-4"><i style="" class="material-icons right">double_arrow</i>This is the way</button>
+        </div>
+
+
+    </div>    
+
+    <br> <br>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+
+  
+
+ 
+
+
+
+
+ 

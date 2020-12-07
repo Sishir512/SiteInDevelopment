@@ -129,15 +129,18 @@
   
   
   {% for comment in comments %}
+    {% if comment.is_parent %}
   <div>
     <span style="float: left;"><img src="img/haaa.jpg" alt="" class="circle responsive-img" style="height: 50px; width: 50px; "></span>
      <span style="font-size: 13pt; font-weight:500; "> &nbsp;  &nbsp; @{{ comment.author.username }} </span> <br>
      <span>  &nbsp;  &nbsp; 1 day ago </span>
   
      <p class="blogcomment"> {{ comment.content | safe}} </p>
+     <p> ID = {{ comment.id }}</p>
        <span style=" cursor:pointer; font-size: 12pt">Reply</span>
    </div>
-   
+   {% else %}
+   {% for reply in comment.replies.all %}
   <br>
   
    <!--reply sample-->
@@ -145,12 +148,10 @@
    <div>  
    <div>
     <span style="float: left;"><img src="img/haaa.jpg" alt="" class="circle responsive-img" style="height: 50px; width: 50px; "></span>
-     <span style="font-size: 13pt; font-weight:500; "> &nbsp;  &nbsp; @No 3 </span> <br>
+     <span style="font-size: 13pt; font-weight:500; "> &nbsp;  &nbsp; @{{ reply.author.username }} </span> <br>
      <span>  &nbsp;  &nbsp; 1 day ago </span>
   
-     <p class="blogcomment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, quas ipsum, nesciunt perspiciatis ad recusandae, vero 
-       consectetur 
-       maiores in aspernatur similique. Atque fugiat asperiores placeat! Voluptates beatae dolores officia voluptas!</p>
+     <p class="blogcomment"> {{ reply.content | safe }} </p>
        <span id="replybtn1" style=" cursor:pointer; font-size: 12pt">Reply</span>
    </div>
   
@@ -173,6 +174,8 @@
     </div>
   </div>
   </div>
+  {% endfor %}
+  {% endif %}
   <br>
   <div class="divider"></div>
   <br>

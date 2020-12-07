@@ -21,8 +21,11 @@ class BlogDetail(DetailView):
         return data
     
     def post(self , request , *args , **kwargs):
-        new_comment = BlogComment(content=self.request.POST.get('content') , author = self.request.user , CommentPost=self.get_object())
+        comment_form = CommentForm(self.request.POST)
+        if comment_form.is_valid():
+            content = comment_form.cleaned_data['content']
+        new_comment = BlogComment(content=content , author = self.request.user , CommentPost=self.get_object())
         new_comment.save()
-        return super().post(request , *args , **kwargs)
+        return self.get(request , *args , **kwargs)
     
 

@@ -13,5 +13,5 @@ class CommentForm(forms.ModelForm):
         }
         
         widgets = {
-            'content' : forms.TextInput(attrs={'id' : 'commentarea'})
+            'content' : forms.Textarea(attrs={'id' : 'commentarea' , 'class' : 'materialize-textarea'})
         }
